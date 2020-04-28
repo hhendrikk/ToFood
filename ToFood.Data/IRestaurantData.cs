@@ -9,17 +9,17 @@ namespace ToFood.Data
         IEnumerable<Restaurant> GetAll();
     }
 
-    class IMemoryRestaurantData : IRestaurantData
+    public class MemoryRestaurantData : IRestaurantData
     {
         private readonly List<Restaurant> restaurants;
 
-        public IMemoryRestaurantData()
+        public MemoryRestaurantData()
         {
             this.restaurants = new List<Restaurant>
             {
                 new Restaurant { Id = 1, Name = "Restaurant 1", Cuisine = CuisineType.Mexican },
-                new Restaurant { Id = 1, Name = "Restaurant 2", Cuisine = CuisineType.Italian },
-                new Restaurant { Id = 1, Name = "Restaurant 3", Cuisine = CuisineType.Indian },
+                new Restaurant { Id = 2, Name = "Restaurant 2", Cuisine = CuisineType.Italian },
+                new Restaurant { Id = 3, Name = "Restaurant 3", Cuisine = CuisineType.Indian },
             };
         }
 
