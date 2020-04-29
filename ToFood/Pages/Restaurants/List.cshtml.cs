@@ -10,24 +10,28 @@ using ToFood.Data;
 
 namespace ToFood.Pages.Restaurants
 {
-    public class ListModel : PageModel
+  public class ListModel : PageModel
+  {
+    private readonly IConfiguration config;
+    private readonly IRestaurantData restaurantData;
+
+    [BindProperty(SupportsGet = true)]
+    public string SearchForm { get; set; }
+
+    public IEnumerable<Restaurant> Restaurants { get; set; }
+
+    public string Message { get; set; }
+
+    public ListModel(IConfiguration config, IRestaurantData restaurantData)
     {
-        private readonly IConfiguration config;
-        private readonly IRestaurantData restaurantData;
-        public IEnumerable<Restaurant> Restaurants { get; set; }
-
-        public string Message { get; set; }
-
-        public ListModel(IConfiguration config, IRestaurantData restaurantData)
-        {
-            this.config = config;
-            this.restaurantData = restaurantData;
-        }
-
-        public void OnGet()
-        {
-            Message = config["Message"];
-            Restaurants = this.restaurantData.GetAll();
-        }
+      this.config = config;
+      this.restaurantData = restaurantData;
     }
+
+    public void OnGet()
+    {
+      Message = config["Message"];
+      Restaurants = this.restaurantData.GetRestaurantByName(SearchForm);
+    }
+  }
 }
